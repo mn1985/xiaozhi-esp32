@@ -14,6 +14,8 @@
 #include <esp_lcd_panel_ops.h>
 #include <esp_lcd_gc9a01.h>
 
+#include <driver/uart.h>
+
 #define TAG "AtomS3R+EchoBase"
 
 #define PI4IOE_ADDR          0x43
@@ -114,6 +116,21 @@ private:
     Display* display_ = nullptr;
     Button boot_button_;
     bool is_echo_base_connected_ = false;
+
+    void InitializeUart() {
+        const uart_port_t uart_num = UART_NUM_0;
+        uart_config_t uart_config = {
+            .baud_rate = 115200,
+            .data_bits = UART_DATA_8_BITS,
+            .parity    = UART_PARITY_DISABLE,
+            .stop_bits = UART_STOP_BITS_1,
+            .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
+            .source_clk = UART_SCLK_DEFAULT,
+        };
+        ESP_ERROR_CHECK(uart_param_config(uart_num, &uart_config));
+        ESP_ERROR_CHECK(uart_set_pin(uart_num, GPIO_NUM_1, GPIO_NUM_2, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE)); // TX=G1, RX=G2
+        ESP_ERROR_CHECK(uart_driver_install(uart_num, 1024, 0, 0, NULL, 0));
+    }
     void InitializeI2c() {
         // Initialize I2C peripheral
         i2c_master_bus_config_t i2c_bus_cfg = {
@@ -275,6 +292,7 @@ private:
 public:
     AtomS3rEchoBaseBoard() : boot_button_(BOOT_BUTTON_GPIO) {
         InitializeI2c();
+        InitializeUart();
         I2cDetect();
         CheckEchoBaseConnection();
         InitializePi4ioe();
