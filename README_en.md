@@ -1,5 +1,9 @@
 # An MCP-based Chatbot
 
+> **This repository is a fork.  
+> UART initialization for AtomS3R + Echo Base board has been added, using UART0 (TX: G1=GPIO1, RX: G2=GPIO2).  
+> The main difference from the original is the UART configuration.**
+
 (English | [中文](README.md) | [日本語](README_ja.md))
 
 ## Video

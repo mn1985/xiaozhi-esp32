@@ -1,5 +1,9 @@
 # MCP ベースのチャットボット
 
+> **本リポジトリはfork版です。  
+> AtomS3R + Echo Baseボード用にUART初期化処理を追加し、UART0（TX: G1=GPIO1, RX: G2=GPIO2）を利用するよう修正しています。  
+> オリジナルとの差分は主にUART設定部分です。**
+
 （日本語 | [中文](README.md) | [English](README_en.md)）
 
 ## 動画

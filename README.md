@@ -1,5 +1,9 @@
 # An MCP-based Chatbot | 一个基于 MCP 的聊天机器人
 
+> **本仓库为fork版本。  
+> 针对AtomS3R + Echo Base板，增加了UART初始化，使用UART0（TX: G1=GPIO1, RX: G2=GPIO2）。  
+> 与原版的主要区别在于UART设置。**
+
 （中文 | [English](README_en.md) | [日本語](README_ja.md)）
 
 ## 视频
